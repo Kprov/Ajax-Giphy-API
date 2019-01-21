@@ -2,7 +2,7 @@ $(document).ready(function(){
 console.log("Ready");
 
 //Establishing array with strings for the topic to be sentt to the API
-var movies = ["Shrek", "Cinderella","Armageddon","Gladiator","Cars","Aliens","Godfather"];
+var movies = ["Shrek", "Cinderella","Armageddon","Gladiator","Terminator","Aliens","Godfather","It","Montana"];
 console.log(movies)
 //Declaring text variable to hold the element text
 var text = "<div>"
@@ -14,33 +14,57 @@ text += "</div>";
 document.getElementById("buttons").innerHTML = text;
 
 function display(value) {
-    text += "<button class='btn-lg btn-primary' movie-data=" + value + ">" + value +"</button>";
+    text += "<button class='button btn-lg btn-primary gif' movie-data=" + value + ">" + value +"</button>";
 }
-console.log(text)
+    
+
+
 $("button").on("click", function(){
-    
-    
     var mdata = $(this).attr("movie-data");
     var apiKey = "N5OKJJ5Kx7gKlaYEZha1x3zZvZli3Wwd";
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + mdata + "&api_key=" + apiKey + "&limit=20";
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + mdata + "&api_key=" + apiKey + "&limit=10";
     var xhr = $.get(queryURL);
-    xhr.done(function(data) { console.log("success got data", data); 
-    console.log(data.data)
-    console.log(xhr)
-    var results = data.data;
+    xhr.done(function(data) { console.log("success got data", data);
+    var results = data.data; 
+    
 
     for (var i = 0; i < results.length; i++) {
-        var url = results[i].images.fixed_height.url;
+        
+        var url = results[i].images.fixed_height_still.url;
+        var animated = results[i].images.fixed_height.url;
+
         console.log(url)
 
-        var gifImg = $("<img>");
+        var gifImg = $("<img class='gif' data-state='still'>");
         gifImg.attr("src", url);
+        gifImg.attr("data-animated", animated);
 
         $("#content-here").prepend(gifImg);
-    }
-    
-    
+    } 
+
+    $(".gif").on("click", function(){
+        var state = $(this).attr("data-state");
+        
+        
+        
+        console.log(state)
+        console.log(animated)
+        if (state === "still"){
+            $(this).attr("src", animated);
+            $(this).attr("data-state", "animate");
+        }
+        else if (state !== "still"){
+            $(this).attr("src", url);
+            $(this).attr("data-state", "still");
+        }
+    })
 });
+
+
+
+
+
+
     
 
     
