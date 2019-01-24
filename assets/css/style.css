@@ -1,0 +1,26 @@
+.content{
+    margin-top:50px; 
+}
+body{
+    background-color: #FBEAEB;
+}
+.gif{
+    background-color: #2f3c7e;
+    margin-left:5px;
+}
+#buttons{
+    background-color:#FBEAEB;
+}
+.buttonsbgrd{
+    background-color: #FBEAEB;
+    margin-left:350px;
+    margin-top:25px;
+}
+.btndiv{
+    background-color:#FBEAEB;
+}
+p{
+    font-weight:bold;
+    color:#2f3c7e;
+
+}

@@ -2,10 +2,10 @@ $(document).ready(function(){
 console.log("Ready");
 
 //Establishing array with strings for the topic to be sentt to the API
-var movies = ["Shrek", "Cinderella","Armageddon","Gladiator","Terminator","Aliens","Godfather","It","Montana"];
+var movies = ["Shrek", "Cinderella","Armageddon","Gladiator","Terminator","Aliens","Godfather","It"];
 console.log(movies)
 //Declaring text variable to hold the element text
-var text = "<div>"
+var text = "<div class='btndiv'>"
 //callback function to display each string individually into a button
 movies.forEach(display);
 
@@ -39,9 +39,8 @@ $("button").on("click", function(){
         gifImg.attr("src", still);
         gifImg.attr("data-animated", animated);
         gifImg.attr("data-still", still)
-        search.append(p);
         search.append(gifImg);
-        
+        search.append(p);
         
 
         
