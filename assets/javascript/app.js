@@ -27,21 +27,28 @@ $("button").on("click", function(){
     xhr.done(function(data) { console.log("success got data", data);
     var results = data.data; 
     
-
+    
     for (var i = 0; i < results.length; i++) {
-        
-        var url = results[i].images.fixed_height_still.url;
+        var search = $("<div>");
         var animated = results[i].images.fixed_height.url;
-
-        console.log(url)
-
+        var still = results[i].images.fixed_height_still.url;
+        var rating = results[i].rating;
+        var p = $("<p>").text("Rating: " +rating);
         var gifImg = $("<img class='gif' data-state='still'>");
-        gifImg.attr("src", url);
+        console.log(still)
+        gifImg.attr("src", still);
         gifImg.attr("data-animated", animated);
+        gifImg.attr("data-still", still)
+        search.append(p);
+        search.append(gifImg);
+        
+        
 
-        $("#content-here").prepend(gifImg);
+        
+
+        $("#content-here").prepend(search);
     } 
-
+    
     $(".gif").on("click", function(){
         var state = $(this).attr("data-state");
         
@@ -50,11 +57,11 @@ $("button").on("click", function(){
         console.log(state)
         console.log(animated)
         if (state === "still"){
-            $(this).attr("src", animated);
+            $(this).attr("src", $(this).data("animated"));
             $(this).attr("data-state", "animate");
         }
-        else if (state !== "still"){
-            $(this).attr("src", url);
+        else{
+            $(this).attr("src", $(this).data("still"));
             $(this).attr("data-state", "still");
         }
     })
